@@ -1,0 +1,20 @@
+{
+  "name": "com.gruijter.beeclear",
+  "version": "1.0.0",
+  "description": "Connect Beeclear P1 to Homey",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "beeclear",
+    "P1",
+    "smart",
+    "meter"
+  ],
+  "author": "gruijter@hotmail.com",
+  "license": "GPL3",
+  "dependencies": {
+    "fixture-stdout": "^0.2.1"
+  }
+}

@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+	<script type="text/javascript" src="/manager/webserver/assets/js/jquery.js"></script>
+	<script type="text/javascript" src="pair.js" data-origin="pair"></script>
+	<style>
+		/* place on top of Homey navigation window */
+		#hy-views { position: static; }
+	</style>
+</head>
+<body>
+	<div class="setting">
+		<p data-i18n="pair.instructions" class="instructions">Instructions</p>
+
+		<label class="settings-item-description" data-i18n="pair.username">username</label>
+		<div class="settings-itemgroup">
+			<input id="username" type="text" value="" placeholder="default">
+		</div>
+
+		<label class="settings-item-description" data-i18n="pair.password">password</label>
+		<div class="settings-itemgroup">
+			<input id="password" type="password" value="" placeholder="default">
+		</div>
+
+		<label class="settings-item-description" data-i18n="pair.host">host</label>
+		<div class="settings-itemgroup">
+			<input id="host" type="text" value="" placeholder="Auto-discover">
+		</div>
+
+		<div class="settings-itemgroup">
+			<div class="settings-item-text">
+					<span data-i18n="pair.useTLS">HTTPS</span>
+			</div>
+			<div class="settings-item-last">
+					<label class="form-switch">
+							<input type="checkbox" id="useTLS" >
+							<i></i>
+					</label>
+			</div>
+		</div>
+
+		<label class="settings-item-description" data-i18n="pair.testSettings">Start test</label>
+		<button id="runTest" class="btn" onclick="testSettings()" data-i18n="pair.testSettings">Start Test</button>
+	</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+	"pair": {
+		"title": "Add BeeClear P1",
+		"instructions": "If you did not change the default password in the BeeClear device, you can immediately click on SAVE. Otherwise enter your username and password first. Do not enter an IP address to have Homey try auto-discovery.",
+		"host": "URL or IP address",
+		"useTLS": "Use HTTPS",
+		"username": "Username",
+		"password": "Password",
+		"testSettings": "Save",
+		"success": "Success!"
+  },
+	"settings": {
+		"benefit": "Integrate the BeeClear energy monitor, reduce your CO2 footprint.",
+		"tab1": {
+			"title": "Instructions",
+			"addDeviceTitle": "Add a BeeClear device to Homey",
+			"addDeviceInstructions": "Your BeeClear must already be installed in your network and setup via the webinterface. Now add it to Homey via the Homey tab `Devices`. If you did't change the default settings you can directly click on save. The polling interval can be changed in the device settings.",
+			"ledringTitle": "Enable LED ring",
+			"ledringInstructions": "The Homey LED ring can show you how much energy you are using and producing. Go to the Homey settings `LED Ring` and select the `BeeClear Power` screensaver."
+		},
+		"tab2": {
+			"title": "Debug Logs",
+			"logs": "Logs",
+			"deletelogs": "Delete logs",
+			"updateLogs": "Refresh logs",
+			"deleteWarning": "Delete all logs?",
+			"deleted": "Logs deleted!"
+		}
+	}
+}
