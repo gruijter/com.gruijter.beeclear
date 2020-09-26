@@ -28,7 +28,6 @@ function updateLogs() {
 	}
 }
 
-
 function deleteLogs() {
 	Homey.confirm(Homey.__('settings.tab2.deleteWarning'), 'warning', (error, result) => {
 		if (result) {
