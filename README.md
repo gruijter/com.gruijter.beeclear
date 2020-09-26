@@ -1,4 +1,4 @@
-# BeeClear Energy maanger #
+# BeeClear Energy manager #
 
 Homey app to interface DSMR P1 smart meters via a BeeClear Enery Manager.
 
@@ -25,11 +25,12 @@ The polling interval can be changed in the device settings.
 
 ##### Donate: #####
 If you like the app you can show your appreciation by posting it in the [forum],
-and if you really like it you can buy me a beer.
+and if you really like it you can [buy me a beer]
 
 ===============================================================================
 
 Version changelog: [changelog.txt]
 
+[buy me a beer]: https://www.paypal.com/paypalme/gruijter
 [forum]: https://community.athom.com/t/34980
 [changelog.txt]: https://github.com/gruijter/com.gruijter.beeclear/blob/master/changelog.txt
