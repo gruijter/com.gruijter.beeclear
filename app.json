@@ -292,7 +292,7 @@
         },
         "args": [
           {
-            "name": "Smile",
+            "name": "Beeclear",
             "type": "device",
             "filter": "driver_id=p1",
             "placeholder": {
@@ -321,7 +321,7 @@
         },
         "args": [
           {
-            "name": "Smile",
+            "name": "Beeclear",
             "type": "device",
             "filter": "driver_id=p1",
             "placeholder": {
@@ -361,7 +361,7 @@
         },
         "args": [
           {
-            "name": "Smile",
+            "name": "Beeclear",
             "type": "device",
             "filter": "driver_id=p1",
             "placeholder": {

@@ -14,7 +14,7 @@ function updateLogs() {
 					.forEach((line) => {
 						const logLine = line
 							.replace(' [MyApp]', '')
-							.replace(' [ManagerDrivers] [smilep1]', '');
+							.replace(' [ManagerDrivers] [p1]', '');
 						lines += `${logLine}<br />`;
 
 					});

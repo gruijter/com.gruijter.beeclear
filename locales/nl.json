@@ -1,6 +1,6 @@
 {
 	"pair": {
-		"title": "Toevoegen Smile P1",
+		"title": "Toevoegen BeeClear Energie Manager",
 		"instructions": "Als je in het BeeClear apparaat het standaard wachtwoord niet hebt veranderd kun je direct klikken op OPSLAAN. Voer anders eerst je gebruikersnaam en wachtwoord in. Als je geen IP adres invult zal Homey auto-discovery proberen",
 		"host": "URL of IP adres",
 		"useTLS": "Gebruik HTTPS",
