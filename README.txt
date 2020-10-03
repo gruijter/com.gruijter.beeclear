@@ -1,5 +1,3 @@
-DSMR P1 smart meter readings via BeeClear Energy Manager.
-
 A local connection over IP is used, so there is no need for an internet connection.
 
 The app logs and provides flow cards for the following data:
@@ -13,8 +11,3 @@ The app logs and provides flow cards for the following data:
 Ledring screensaver:
 - See how much energy you are using or producing just by looking at your Homey!
 - Is the wash-dryer ready? Am I now producing power to the grid?
-
-The power is totalized for consumed and produced power, during off-peak and peak hours. Production to the powergrid is displayed as negative watts.
-
-
-

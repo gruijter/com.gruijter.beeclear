@@ -1,1 +1,2 @@
+v1.0.1  2020.10.03 Move to package beeclear@1.0.0. App icon update. Added NL app store translation. Minor fixes.
 v1.0.0  2020.09.26 Initial release

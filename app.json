@@ -6,14 +6,14 @@
   },
 
   "description": {
-    "en": "Imports data from the Beeclear P1 energy manager",
-    "nl": "Leest data van de Beeclear P1 energie manager"
+    "en": "P1 smart meter readout via the Beeclear Energy Manager",
+    "nl": "P1 slimme meter uitlezen via de Beeclear Energie Manager"
   },
 	"tags": {
 		"en": [ "dsmr", "p1", "beeclear", "power", "water", "gas" ],
 		"nl": [ "dsmr", "p1", "beeclear", "power", "water", "gas" ]
 	},
-	"version": "1.0.0",
+	"version": "1.0.1",
   "sdk": 2,
   "brandColor": "#F9A31B",
   "compatibility": ">= 3",

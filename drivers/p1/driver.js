@@ -22,7 +22,7 @@ along with com.gruijter.beeclear.  If not, see <http://www.gnu.org/licenses/>.
 'use strict';
 
 const Homey = require('homey');
-const Beeclear = require('../../beeclear.js');
+const Beeclear = require('beeclear');
 const Ledring = require('../../ledring.js');
 
 class BeeclearDriver extends Homey.Driver {
@@ -59,7 +59,8 @@ class BeeclearDriver extends Homey.Driver {
 					useTLS: data.useTLS,
 				};
 				const bc = new Beeclear(options);
-				const { setting } = await bc.login();
+				await bc.login();
+				const { setting } = await bc.getDeviceInfo();
 				const { eth } = await bc.getNetwork();
 
 				const device = {
@@ -87,21 +88,17 @@ class BeeclearDriver extends Homey.Driver {
 						// 'meter_power.producedOffPeak',
 					],
 				};
-				// if (data.includeOffPeak) {
 				if (setting.dubbeltariefmeter) {
 					device.capabilities.push('meter_offPeak');
 					device.capabilities.push('meter_power.peak');
 					device.capabilities.push('meter_power.offPeak');
 				}
-				// if (data.includeProduction) {
 				if (setting.levering) {
 					device.capabilities.push('meter_power.producedPeak');
 				}
-				// if (data.includeProduction && data.includeOffPeak) {
 				if (setting.dubbeltariefmeter && setting.levering) {
 					device.capabilities.push('meter_power.producedOffPeak');
 				}
-				// if (data.includeGas) {
 				if (setting.showgas) {
 					device.capabilities.push('measure_gas');
 					device.capabilities.push('meter_gas');

@@ -1,0 +1,3196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>Global - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Beeclear.html">Beeclear</a><ul class='methods'><li data-type='method'><a href="Beeclear.html#discover">discover</a></li><li data-type='method'><a href="Beeclear.html#getDeviceInfo">getDeviceInfo</a></li><li data-type='method'><a href="Beeclear.html#getFirmwareList">getFirmwareList</a></li><li data-type='method'><a href="Beeclear.html#getMeterReadings">getMeterReadings</a></li><li data-type='method'><a href="Beeclear.html#getNetwork">getNetwork</a></li><li data-type='method'><a href="Beeclear.html#getStatus">getStatus</a></li><li data-type='method'><a href="Beeclear.html#login">login</a></li><li data-type='method'><a href="Beeclear.html#logout">logout</a></li><li data-type='method'><a href="Beeclear.html#reboot">reboot</a></li></ul></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Global</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+        
+        </h2>
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+            
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<h4 class="name" id="deviceInfo">deviceInfo</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>info</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>'ok'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Type ID of the smart meter, e.g. 'KFM5KAIFA-METER'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>serialElec</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>serial number of the electricity meter, e.g. '98109215        '</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gas</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>slot: 0-3 for multiple gas meters. serial: serial number of the gas meter, e.g. '28011001147028281'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>protocolVersion</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>DSMR protocol version of the smart meter. e.g. '42', or '0' for unknown</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>uptime</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>time since last BeeClear device startup in seconds, e.g. 1018445</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>hardware</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>BeeClear device hardware version. e.g. '2'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>firmware</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>BeeClear device software version. e.g. '49.10_NL'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>timeSync</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>2 = NTP</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setting.landcode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Country code 'NL' or 'BE'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setting.user</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>logged in user name</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setting.auth</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>logged in user role. 'admin' or 'user'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setting.metertype</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>is DSMR3 meter</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setting.mijnmeter</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>local IP is published to beeclear.nl/mijnmeter</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setting.showgas</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>gas meter via P1 is enabled</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setting.gasUseElekTime</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>use elektricity timestamp to store gas data</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setting.dubbeltariefmeter</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>use dual tariff meter</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setting.levering</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>use production meter</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setting.testfirmware</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>use test fimrware during updates</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setting.enableHttps</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTPS port 443 is enabled</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setting.enableMqtt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>MQTT interface is enabled</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setting.driefaseMeting</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>3 phase meter is enabled</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setting.rawlogging</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>raw logging is enabled</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setting.dsmrtime</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>DSMR time is enabled</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setting.certUse</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>custom certificate is enabled</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setting.tarief</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>tariffs used to calculate energy cost</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setting.starttime</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>time of the oldest measurement stored on the SD-card. In unix-time-format. e.g. 1600866000</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<div class="description">
+    <p>settings properties of the BeeClear device</p>
+</div>
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// deviceInfo
+{
+  info: 'ok',
+  name: 'KFM5KAIFA-METER',
+  serialElec: '98109215        ',
+  gas: [ { slot: 0, serial: '28011001147028281' } ],
+  protocolVersion: '42',
+  uptime: 1018445,
+  hardware: '2',
+  firmware: '49.10_NL',
+  timeSync: 2,
+  setting: {
+    landcode: 'NL',
+    user: 'beeclear',
+    auth: 'admin',
+    metertype: true,
+    mijnmeter: true,
+    showgas: true,
+    gasUseElekTime: false,
+    dubbeltariefmeter: true,
+    levering: true,
+    testfirmware: false,
+    enableHttps: true,
+    enableMqtt: false,
+    driefaseMeting: false,
+    rawlogging: false,
+    dsmrtime: false,
+    certUse: false,
+    tarief: {
+      gas: 0.6,
+      elekHoog: 0.19512,
+      elekLaag: 0.17982,
+      gasvast24h: 0,
+      elekvast24h: 0
+    },
+    starttime: { gas: 1600866000, elek: 1600866000, elekw: 1600868110 }
+  }
+}</code></pre>
+
+
+
+            
+                
+<h4 class="name" id="FWList">FWList</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>info</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>'ok'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>current</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>installed firmware level, e.g. '49.10_NL'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>firmwareNew</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>new available stable firmware level, e.g. '49.10_NL'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>firmwareTest</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>new available unstable firmware level, e.g. 'soult_NL'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>firmware[].file</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>filename of downloaded firmware file, e.g. 'BeeClear_49.10_NL.bin'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>firmware[].version</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>version of downloaded firmware file, '49.10_NL'</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<div class="description">
+    <p>FWList is an object containing current and downloadable firmware levels.</p>
+</div>
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// FWList
+{
+  info: 'ok',
+  firmware: [
+    { file: 'BeeClear_49.10_NL.bin', version: '49.10_NL' }
+  ],
+  firmwareNew: '49.10_NL',
+  firmwareTest: 'soult_NL',
+  current: '49.10_NL'
+}</code></pre>
+
+
+
+            
+                
+<h4 class="name" id="loggedIn">loggedIn</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>status</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP(S) status response code, e.g. 200</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>login message, e.g. 'Welkom'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>access_token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>'toegang gegeven'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>security</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>0</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<div class="description">
+    <p>meterReadingsShort is an object containing actual power and gas meter information.</p>
+</div>
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// loggedIn
+{
+  status: 200,
+  message: 'Welkom',
+  access_token: 'toegang gegeven',
+  security: 0
+}</code></pre>
+
+
+
+            
+                
+<h4 class="name" id="meterReadingsFull">meterReadingsFull</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>d</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>time of the last measurement in unix-time-format. e.g. 1600798993</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ed</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>time of the last electricity measurement in unix-time-format. e.g. 1600798989</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>tariefStatus</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>1 = off-peak (low tariff), 2 = peak (high tariff)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ul</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>consumption counter low tariff in Wh. e.g. 12637314</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>uh</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>consumption counter high tariff in Wh. e.g. 8553028</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gl</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>production counter low tariff in Wh. e.g. 4288455</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gh</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>production counter high tariff in Wh. e.g. 10048153</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>verbruik0</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>actual power consumption Phase 1 in Watt. -1 = not present</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>leveren0</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>actual power production Phase 1 in Watt. -1 = not present</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>verbruik1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>actual power consumption Phase 2 in Watt. -1 = not present</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>leveren1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>actual power production Phase 2 in Watt. -1 = not present</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>verbruik2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>actual power consumption Phase 3 in Watt. -1 = not present</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>leveren2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>actual power production Phase 3 in Watt. -1 = not present</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>u</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>actual total power consumption in Watt. e.g. 814</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>g</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>actual total power production in Watt</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gas[].slot</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>0 for a single gas meter. 0-3 for multiple gas meters</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gas[].val</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>gas-meter counter in liter (1000 * m³). e.g. 6399475</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gas[].time</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>time of the last gas measurement in unix-time-format. e.g. 1600797600</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<div class="description">
+    <p>meterReadingsFull is an object containing actual power and gas meter information.</p>
+</div>
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// meterReadingsFull
+{
+  d: 1600798993,
+  ed: 1600798989,
+  tariefStatus: 2,
+  ul: 12637314,
+  uh: 8553028,
+  gl: 4288455,
+  gh: 10048153,
+  verbruik0: 814,
+  leveren0: 0,
+  verbruik1: -1,
+  leveren1: -1,
+  verbruik2: -1,
+  leveren2: -1,
+  u: 812,
+  g: 0,
+  gas: [ { slot: 0, val: 6399475, time: 1600797600 } ]
+}</code></pre>
+
+
+
+            
+                
+<h4 class="name" id="meterReadingsShort">meterReadingsShort</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>pwr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>power meter total (consumption - production) in kWh. e.g. 7507.336</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>net</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>actual power consumption in Watt. e.g. 3030</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>p2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>consumption counter high tariff in kWh. e.g. 896.812</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>p1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>consumption counter low tariff in kWh. e.g. 16110.964</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>n2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>production counter high tariff in kWh. e.g. 4250.32</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>n1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>production counter low tariff in kWh. e.g. 1570.936</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>tm</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>time of retrieving info. unix-time-format. e.g. 1542575626</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gas</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>gas-meter counter in m³. e.g. 6161.243</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gtm</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>time of the last gas measurement in unix-time-format. e.g. 1542574800</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<div class="description">
+    <p>meterReadingsShort is an object containing actual power and gas meter information.</p>
+</div>
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// meterReadingsShort
+{	pwr: 646,
+	net: 7507.335999999999,
+	p2: 5540.311,
+	p1: 3161.826,
+	n2: 400.407,
+	n1: 794.394,
+	tm: 1560178800,
+	gas: 2162.69,
+	gtm: 1560178800 }</code></pre>
+
+
+
+            
+                
+<h4 class="name" id="networkInfo">networkInfo</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>status</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>'ok'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ip</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>IP address of the BeeClear device on the network interface, e.g. '192.168.200.201'.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>netmask</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>e.g. '255.255.255.0'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>proto</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>obtain IP address. 'static', 'dhcp' or 'off'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>hostname</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>name of the BeeClear device in the local network, e.g. 'beeclear'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>router</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>router address used by the BeeCler device, e.g. '192.168.200.1'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dns</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>dns server address used by the BeeCler device</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>link</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>ethernet link state, e.g. 'up' or 'lowerlayerdown'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>speed</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>ethernet speed, e.g. '10'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>duplex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>ethernet duplex, e.g. 'half'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mac</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>MAC address of the BeeClear network interface, e.g. '64:51:7e:63:2b:a5'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>WiFi mode. 'ap' = access point, 'sta' = client station</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ssid</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>WiFi SSID, e.g. 'BeeClear'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>WiFi password</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>encryption</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>WiFi encryption mode, e.g. 'psk2+tkip+ccmp'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>aan</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>WiFi radio is on</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>aan</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>WiFi wireless link state. e.g. 'down' or 'up'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>signal</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>WiFi channel info, e.g. 'channel 3 (2422 MHz), width: 20 MHz, center1: 2422 MHz',</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<div class="description">
+    <p>networkInfo is an object containing information of the Ethernet and WiFi interfaces.</p>
+</div>
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// networkInfo
+{
+  eth: {
+    status: 'ok',
+    ip: '',
+    netmask: '',
+    proto: 'dhcp',
+    hostname: 'beeclear',
+    router: '',
+    dns: '',
+    status_ethernet: {
+      ip: '192.168.200.201',
+      netmask: '255.255.255.0',
+      router: '192.168.200.1',
+      dns: '192.168.200.1',
+      link: 'up',
+      speed: '10',
+      duplex: 'half',
+      mac: '64:51:7e:63:2b:a5'
+    }
+  },
+  wifi: {
+    status: 'ok',
+    ip: '192.168.111.1',
+    netmask: '255.255.255.0',
+    proto: 'off',
+    hostname: 'bcprod',
+    mode: 'ap',
+    ssid: 'BeeClear',
+    key: 'power2you',
+    encryption: 'psk2+tkip+ccmp',
+    router: '',
+    dns: '',
+    status_info: {
+      aan: 1,
+      ip: '',
+      netmask: '',
+      router: '',
+      dns: '',
+      mode: 'sta',
+      wstatus: 'down',
+      signal: '',
+      ssid: '',
+      mac: '64:51:7e:63:2b:a4'
+    }
+  }
+}</code></pre>
+
+
+
+            
+                
+<h4 class="name" id="sessionOptions">sessionOptions</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>username</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>'beeclear'</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>The username</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>password</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>'energie'</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>The password</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>host</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>'beeclear.local'</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>The url or ip address of the Beeclear device.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>port</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>80</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>The port of the Beeclear P1. Defaults to 80. TLS/SSL will be used when setting port to 443.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>useTLS</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>use TLS (HTTPS).</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>timeout</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>4000</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>http(s) timeout in milliseconds. Defaults to 4000ms.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<div class="description">
+    <p>Set of configurable options to set on the class or during login</p>
+</div>
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// session options
+{ username: 'beeclear',
+  password: 'energie',
+  host: 'beeclear.local,
+  port: 443,
+  useTLS: true,
+  timeout: 5000 }</code></pre>
+
+
+
+            
+                
+<h4 class="name" id="status">status</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>p1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>P1 connection state. 0 = not connected, 1 = connected.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sdcardFree</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>SD card free storage space, e.g. '99.9%'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sdcardTotal</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>SD card total storage space, e.g. '15.47 GB'</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<div class="description">
+    <p>status is an object containing P1 connection and SD-card status.</p>
+</div>
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// status
+{ p1: 0, sdcard: 1, sdcardFree: '99.9%', sdcardTotal: '15.47 GB' }</code></pre>
+
+
+
+            
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Fri Oct 02 2020 17:26:19 GMT+0200 (GMT+02:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+
+
+</body>
+</html>

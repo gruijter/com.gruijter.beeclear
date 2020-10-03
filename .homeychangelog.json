@@ -1,1 +1,8 @@
-
+{
+  "1.0.0": {
+    "en": "First app store release"
+  },
+  "1.0.1": {
+    "en": "Move to package beeclear@1.0.0. App icon update. Added NL app store translation. Minor fixes."
+  }
+}

@@ -14,7 +14,7 @@
 		"tab1": {
 			"title": "Instructies",
 			"addDeviceTitle": "Koppel nieuw BeeClear apparaat",
-			"addDeviceInstructions": "Je BeeClear apparaat moet al verboncen zijn met je netwerk and zijn ingesteld via de webinterface. Voeg hem nu toe aan Homey via de Homey tab `Apparaten`. Als je de standaard instellingen niet hebt gewijzigd kun je direct op opslaan klikken. De polling snelheid kan worden aangepast in de apparaat instellingen.",
+			"addDeviceInstructions": "Je BeeClear apparaat moet al verbonden zijn met je netwerk en zijn ingesteld via de webinterface. Voeg hem nu toe aan Homey via de Homey tab `Apparaten`. Als je de standaard instellingen niet hebt gewijzigd kun je direct op opslaan klikken. De polling snelheid kan worden aangepast in de apparaat instellingen.",
 			"ledringTitle": "LED ring aanzetten",
 			"ledringInstructions": "De Homey LED ring kan je laten zien hoeveel energie je gebruikt en produceert. Ga naar de Homey instellingen `LED Ring` en selecteer `BeeClear Energie` als screensaver."
 		},
