@@ -1,5 +1,5 @@
 /*
-Copyright 2016 - 2019, Robin de Gruijter (gruijter@hotmail.com)
+Copyright 2020 - 2021, Robin de Gruijter (gruijter@hotmail.com)
 
 This file is part of com.gruijter.beeclear.
 
@@ -19,73 +19,90 @@ along with com.gruijter.beeclear.  If not, see <http://www.gnu.org/licenses/>.
 
 'use strict';
 
-const Homey = require('homey');
+const { Device } = require('homey');
+const Beeclear = require('beeclear');
+const util = require('util');
 
-class P1Device extends Homey.Device {
+const setTimeoutPromise = util.promisify(setTimeout);
+
+class BeeclearDevice extends Device {
 
 	// this method is called when the Device is inited
 	async onInit() {
 		this.log('device init: ', this.getName(), 'id:', this.getData().id);
 		try {
 			// init some stuff
-			this._driver = this.getDriver();
-			this._ledring = this._driver.ledring;
-			this.handleNewReadings = this._driver.handleNewReadings.bind(this);
+			this.restarting = false;
 			this.watchDogCounter = 10;
 			const settings = this.getSettings();
 			this.meters = {};
 			this.initMeters();
-			// create Beeclear session
+
+			// create session
 			const options = {
 				host: settings.host,
 				port: Number(settings.port),
 				username: settings.username,
 				password: settings.password,
 				useTLS: settings.useTLS,
+				timeout: (settings.pollingInterval * 900),
 			};
-			this.bc = new this._driver.Beeclear(options);
-			// register trigger flow cards of custom capabilities
-			this.tariffChangedTrigger = new Homey.FlowCardTriggerDevice('tariff_changed')
-				.register();
-			this.powerChangedTrigger = new Homey.FlowCardTriggerDevice('power_changed')
-				.register();
-			// register condition flow cards
-			const offPeakCondition = new Homey.FlowCardCondition('offPeak');
-			offPeakCondition.register()
-				.registerRunListener(() => Promise.resolve(this.meters.lastOffpeak));
+			this.bc = new Beeclear(options);
+
 			// start polling device for info
-			this.intervalIdDevicePoll = setInterval(() => {
-				this.doPoll();
-			}, 1000 * settings.pollingInterval);
+			this.startPolling(settings.pollingInterval);
+
 		} catch (error) {
 			this.error(error);
 		}
 	}
 
+	startPolling(interval) {
+		this.homey.clearInterval(this.intervalIdDevicePoll);
+		this.log(`start polling ${this.getName()} @${interval} seconds interval`);
+		this.intervalIdDevicePoll = this.homey.setInterval(() => {
+			this.doPoll();
+		}, interval * 1000);
+	}
+
+	stopPolling() {
+		this.log(`Stop polling ${this.getName()}`);
+		this.homey.clearInterval(this.intervalIdDevicePoll);
+	}
+
+	async restartDevice(delay) {
+		if (this.restarting) return;
+		this.restarting = true;
+		this.stopPolling();
+		// this.destroyListeners();
+		const dly = delay || 2000;
+		this.log(`Device will restart in ${dly / 1000} seconds`);
+		// this.setUnavailable('Device is restarting. Wait a few minutes!');
+		await setTimeoutPromise(dly).then(() => this.onInit());
+	}
+
 	// this method is called when the Device is added
-	onAdded() {
-		this.log(`Beeclear added as device: ${this.getName()}`);
+	async onAdded() {
+		this.log(`Meter added as device: ${this.getName()}`);
 	}
 
 	// this method is called when the Device is deleted
 	onDeleted() {
-		// stop polling
-		clearInterval(this.intervalIdDevicePoll);
-		this.log(`Deleted device: ${this.getName()} ${this.getData().id}`);
+		this.stopPolling();
+		// this.destroyListeners();
+		this.log(`Deleted as device: ${this.getName()}`);
 	}
 
 	onRenamed(name) {
-		this.log(`Beeclear renamed to: ${name}`);
+		this.log(`Meter renamed to: ${name}`);
 	}
 
 	// this method is called when the user has changed the device's settings in Homey.
-	onSettings(oldSettingsObj, newSettingsObj, changedKeysArr, callback) {
-		this.log('settings change requested by user');
-		// this.log(newSettingsObj);
+	async onSettings({ newSettings }) { // , oldSettings, changedKeys) {
 		this.log(`${this.getName()} device settings changed`);
-		// do callback to confirm settings change
-		callback(null, true);
+		this.log(newSettings);
 		this.restartDevice(1000);
+		return Promise.resolve(true);
 	}
 
 	async doPoll() {
@@ -101,7 +118,7 @@ class P1Device extends Homey.Device {
 				const isEven = this.watchDogCounter === parseFloat(this.watchDogCounter) ? !(this.watchDogCounter % 2) : undefined;
 				if (isEven) {
 					this.watchDogCounter -= 1;
-					// this.log('skipping poll');
+					// console.log('skipping poll');
 					return;
 				}
 			}
@@ -118,30 +135,22 @@ class P1Device extends Homey.Device {
 		}
 	}
 
-	restartDevice(delay) {
-		// stop polling the device, then start init after short delay
-		clearInterval(this.intervalIdDevicePoll);
-		setTimeout(() => {
-			this.onInit();
-		}, delay || 10000);
-	}
-
 	initMeters() {
-		this.meters = {
-			lastMeasureGas: 0,										// 'measureGas' (m3)
-			lastMeterGas: null, 									// 'meterGas' (m3)
-			lastMeterGasTm: 0,										// timestamp of gas meter reading, e.g. 1514394325
-			lastMeasurePower: 0,									// 'measurePower' (W)
-			lastMeasurePowerAvg: 0,								// '2 minute average measurePower' (kWh)
-			lastMeterPower: null,									// 'meterPower' (kWh)
-			lastMeterPowerPeak: null,							// 'meterPower_peak' (kWh)
-			lastMeterPowerOffpeak: null,					// 'meterPower_offpeak' (kWh)
-			lastMeterPowerPeakProduced: null,			// 'meterPower_peak_produced' (kWh)
-			lastMeterPowerOffpeakProduced: null,	// 'meterPower_offpeak_produced' (kWh)
-			lastMeterPowerTm: null, 							// timestamp epoch, e.g. 1514394325
-			lastMeterPowerInterval: null,					// 'meterPower' at last interval (kWh)
-			lastMeterPowerIntervalTm: null, 			// timestamp epoch, e.g. 1514394325
-			lastOffpeak: null,										// 'meterPower_offpeak' (true/false)
+		this.lastMeters = {
+			measureGas: 0,							// 'measureGas' (m3)
+			meterGas: null, 						// 'meterGas' (m3)
+			meterGasTm: 0,							// timestamp of gas meter reading, e.g. 1514394325
+			measurePower: 0,						// 'measurePower' (W)
+			measurePowerAvg: 0,						// '2 minute average measurePower' (kWh)
+			meterPower: null,						// 'meterPower' (kWh)
+			meterPowerPeak: null,					// 'meterPower_peak' (kWh)
+			meterPowerOffPeak: null,				// 'meterPower_offpeak' (kWh)
+			meterPowerPeakProduced: null,			// 'meterPower_peak_produced' (kWh)
+			meterPowerOffPeakProduced: null,		// 'meterPower_offpeak_produced' (kWh)
+			meterPowerTm: null, 					// timestamp epoch, e.g. 1514394325
+			meterPowerInterval: null,				// 'meterPower' at last interval (kWh)
+			meterPowerIntervalTm: null, 			// timestamp epoch, e.g. 1514394325
+			offPeak: null,							// 'meterPower_offpeak' (true/false)
 		};
 	}
 
@@ -154,24 +163,117 @@ class P1Device extends Homey.Device {
 		}
 	}
 
-	updateDeviceState() {
+	updateDeviceState(meters) {
 		// this.log(`updating states for: ${this.getName()}`);
 		try {
-			this.setCapability('measure_power', this.meters.lastMeasurePower);
-			this.setCapability('meter_power', this.meters.lastMeterPower);
-			this.setCapability('measure_gas', this.meters.lastMeasureGas);
-			this.setCapability('meter_gas', this.meters.lastMeterGas);
-			this.setCapability('meter_power.peak', this.meters.lastMeterPowerPeak);
-			this.setCapability('meter_offPeak', this.meters.lastOffpeak);
-			this.setCapability('meter_power.offPeak', this.meters.lastMeterPowerOffpeak);
-			this.setCapability('meter_power.producedPeak', this.meters.lastMeterPowerPeakProduced);
-			this.setCapability('meter_power.producedOffPeak', this.meters.lastMeterPowerOffpeakProduced);
-			this.watchDogCounter = 10;
+			this.setCapability('measure_power', meters.measurePower);
+			this.setCapability('meter_power', meters.meterPower);
+			this.setCapability('measure_gas', meters.measureGas);
+			this.setCapability('meter_gas', meters.meterGas);
+			this.setCapability('meter_power.peak', meters.meterPowerPeak);
+			this.setCapability('meter_offPeak', meters.offPeak);
+			this.setCapability('meter_power.offPeak', meters.meterPowerOffPeak);
+			this.setCapability('meter_power.producedPeak', meters.meterPowerPeakProduced);
+			this.setCapability('meter_power.producedOffPeak', meters.meterPowerOffPeakProduced);
 		} catch (error) {
+			this.error(error);
+		}
+	}
+
+	handleNewReadings(readings) {
+		try {
+			// console.log(`handling new readings for ${this.getName()}`);
+			// gas readings from device
+			const meterGas = readings.gas; // gas_cumulative_meter
+			const meterGasTm = readings.gtm; // gas_meter_timestamp
+			let { measureGas } = this.lastMeters;
+			// constructed gas readings
+			const meterGasTmChanged = (meterGasTm !== this.lastMeters.meterGasTm) && (this.lastMeters.meterGasTm !== 0);
+			if (meterGasTmChanged) {
+				const passedHours = (meterGasTm - this.lastMeters.meterGasTm) / 3600;	// timestamp is in seconds
+				measureGas = Math.round(1000 * ((meterGas - this.lastMeters.meterGas) / passedHours)) / 1000; // gas_interval_meter
+			}
+			// electricity readings from device
+			const meterPowerOffPeakProduced = readings.n1;
+			const meterPowerPeakProduced = readings.n2;
+			const meterPowerOffPeak = readings.p1;
+			const meterPowerPeak = readings.p2;
+			const meterPower = readings.net;
+			let measurePower = readings.pwr;
+			let { measurePowerAvg } = this.lastMeters;
+			const meterPowerTm = readings.tm;
+			// constructed electricity readings
+			let { offPeak } = this.lastMeters;
+			if ((this.lastMeters.meterPowerTm !== null) && ((meterPower - this.lastMeters.meterPower) !== 0)) {
+				offPeak = ((meterPowerOffPeakProduced - this.lastMeters.meterPowerOffPeakProduced) > 0
+				|| (meterPowerOffPeak - this.lastMeters.meterPowerOffPeak) > 0);
+			}
+			// measurePowerAvg 2 minutes average based on cumulative meters
+			let { meterPowerInterval, meterPowerIntervalTm } = this.lastMeters;
+			if (this.lastMeters.meterPowerIntervalTm === null) {	// first reading after init
+				meterPowerInterval = meterPower;
+				meterPowerIntervalTm = meterPowerTm;
+				measurePowerAvg = measurePower;
+			}
+			if ((meterPowerTm - meterPowerIntervalTm) >= 60) {
+				measurePowerAvg = Math.round((3600000 / (meterPowerTm - meterPowerIntervalTm)) * (meterPower - meterPowerInterval));
+				meterPowerInterval = meterPower;
+				meterPowerIntervalTm = meterPowerTm;
+			}
+			// correct measurePower with average measurePower_produced in case point_meter_produced is always zero
+			const producing = (this.lastMeters.meterPowerTm !== null) && (meterPower <= this.lastMeters.meterPower);
+			if (producing && (measurePower < 100) && (measurePower > -50) && (measurePowerAvg < 0)) {
+				measurePower = measurePowerAvg;
+			}
+
+			// trigger the custom trigger flowcards
+			if ((this.lastMeters.offPeak !== null) && (offPeak !== this.lastMeters.offPeak)) {
+				const tokens = { tariff: offPeak };
+				this.homey.flow.getDeviceTriggerCard('tariff_changed')
+					.trigger(this, tokens)
+					.catch(this.error);
+			}
+			if ((this.lastMeters.meterPowerTm !== null) && (measurePower !== this.lastMeters.measurePower)) {
+				const measurePowerDelta = (measurePower - this.lastMeters.measurePower);
+				const tokens = {
+					power: measurePower,
+					power_delta: measurePowerDelta,
+				};
+				this.homey.flow.getDeviceTriggerCard('power_changed')
+					.trigger(this, tokens)
+					.catch(this.error);
+			}
+
+			// update the ledring screensavers
+			if (measurePower !== this.lastMeters.measurePower) this.driver.ledring.change(this.getSettings(), measurePower);
+
+			// store the new readings in memory
+			const meters = {
+				measureGas,
+				meterGas,
+				meterGasTm,
+				measurePower,
+				measurePowerAvg,
+				meterPower,
+				meterPowerPeak,
+				meterPowerOffPeak,
+				meterPowerPeakProduced,
+				meterPowerOffPeakProduced,
+				meterPowerTm,
+				meterPowerInterval,
+				meterPowerIntervalTm,
+				offPeak,
+			};
+			// update the device state
+			this.updateDeviceState(meters);
+			// console.log(meters);
+			this.lastMeters = meters;
+			this.watchDogCounter = 10;
+		}	catch (error) {
 			this.error(error);
 		}
 	}
 
 }
 
-module.exports = P1Device;
+module.exports = BeeclearDevice;

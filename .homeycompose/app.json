@@ -1,0 +1,79 @@
+{
+  "id": "com.gruijter.beeclear",
+  "name": {
+    "en": "BeeClear",
+    "nl": "BeeClear"
+  },
+  "description": {
+    "en": "P1 smart meter readout via the Beeclear Energy Manager",
+    "nl": "P1 slimme meter uitlezen via de Beeclear Energie Manager"
+  },
+  "tags": {
+    "en": [
+      "dsmr",
+      "p1",
+      "beeclear",
+      "power",
+      "water",
+      "gas"
+    ],
+    "nl": [
+      "dsmr",
+      "p1",
+      "beeclear",
+      "power",
+      "water",
+      "gas"
+    ]
+  },
+  "version": "2.0.0",
+  "sdk": 3,
+  "brandColor": "#F9A31B",
+  "compatibility": ">= 5.0.0",
+  "author": {
+    "name": "Robin Gruijter",
+    "email": "gruijter@hotmail.com"
+  },
+  "copyright": "Robin de Gruijter (gruijter@hotmail.com)",
+  "license": " GPL-3.0-or-later",
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "gruijter"
+      }
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/gruijter/com.gruijter.beeclear/issues"
+  },
+  "homeyCommunityTopicId": 34980,
+  "images": {
+    "large": "./assets/images/large.jpg",
+    "small": "./assets/images/small.jpg"
+  },
+  "category": [
+    "energy",
+    "tools",
+    "appliances"
+  ],
+  "gtin": [
+    "7106624352945"
+  ],
+  "permissions": [
+    "homey:manager:ledring"
+  ],
+  "api": {
+    "getLogs": {
+      "method": "get",
+      "path": "/getlogs"
+    },
+    "deleteLogs": {
+      "method": "get",
+      "path": "/deletelogs"
+    }
+  },
+  "platforms": [
+    "local",
+    "local"
+  ]
+}

@@ -4,5 +4,8 @@
   },
   "1.0.1": {
     "en": "Move to package beeclear@1.0.0. App icon update. Added NL app store translation. Minor fixes."
+  },
+  "2.0.0": {
+    "en": "Rewrite to SDK3 and Homey Compose. Fixed offPeak state after app restart. Fixed several 0-value bugs. Http timeout depending on poll time. package beeclear@1.1.0. Ledring code updated."
   }
 }

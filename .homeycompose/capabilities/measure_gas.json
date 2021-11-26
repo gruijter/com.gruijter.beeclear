@@ -1,0 +1,20 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Gas",
+    "nl": "Gas"
+  },
+  "desc": {
+    "en": "Gas usage (previous hour)",
+    "nl": "Gasverbruik (vorige uur)"
+  },
+  "decimals": 4,
+  "units": {
+    "en": "m³",
+    "nl": "m³"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "icon": "./drivers/p1/assets/gas_icon.svg"
+}

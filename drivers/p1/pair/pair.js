@@ -33,7 +33,7 @@ function testSettings() {
 			Homey.alert(error.message, 'error');
 		} else {
 			const device = JSON.parse(result);
-			Homey.addDevice(device, (err, res) => {
+			Homey.createDevice(device, (err, res) => {
 				Homey.hideLoadingOverlay();
 				if (err) { Homey.alert(err, 'error'); return; }
 				Homey.alert(`${__('pair.success')} ${result}`, 'info');
