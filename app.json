@@ -13,7 +13,7 @@
 		"en": [ "dsmr", "p1", "beeclear", "power", "water", "gas" ],
 		"nl": [ "dsmr", "p1", "beeclear", "power", "water", "gas" ]
 	},
-	"version": "1.0.1",
+	"version": "1.0.2",
   "sdk": 2,
   "brandColor": "#F9A31B",
   "compatibility": ">= 3",
