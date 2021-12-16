@@ -152,6 +152,19 @@
             "min": 10
           },
           "value": 10
+        },
+        {
+          "id": "filterReadings",
+          "type": "checkbox",
+          "label": {
+            "en": "Filter readings",
+            "nl": "Filter meetwaarden"
+          },
+          "hint": {
+            "en": "Ignore unrealistic meter readings",
+            "nl": "Negeer onrealistische meter waarden"
+          },
+          "value": false
         }
       ]
     },

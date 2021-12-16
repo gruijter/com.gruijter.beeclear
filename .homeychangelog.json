@@ -7,5 +7,8 @@
   },
   "2.0.0": {
     "en": "Rewrite to SDK3 and Homey Compose. Fixed offPeak state after app restart. Fixed several 0-value bugs. Http timeout depending on poll time. package beeclear@1.1.0. Ledring code updated."
+  },
+  "2.1.0": {
+    "en": "Fix tariff change flow trigger. Added filter unrealistic values option."
   }
 }

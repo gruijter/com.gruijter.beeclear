@@ -125,6 +125,10 @@ class BeeclearDevice extends Device {
 			// get new readings and update the devicestate
 			if (!this.bc.loggedIn) await this.bc.login();
 			const readings = await this.bc.getMeterReadings(true);
+			if (this.getSettings().filterReadings && !this.isValidReading(readings)) {
+				this.watchDogCounter -= 1;
+				return;
+			}
 			this.setAvailable();
 			this.handleNewReadings(readings);
 			this.watchDogCounter = 10;
@@ -180,6 +184,59 @@ class BeeclearDevice extends Device {
 		}
 	}
 
+	isValidReading(readings) {
+		let validReading = true;
+		if (this.lastMeters.meterPowerIntervalTm === null) { // first reading after init
+			return validReading;	// We have to assume that the first reading after init is a valid reading :(
+		}
+		// check if gas readings make sense
+		const meterGas = readings.gas;
+		if (meterGas < this.lastMeters.meterGas) {
+			this.log('negative gas usage');
+			validReading = false;
+		}
+		if (meterGas - this.lastMeters.meterGas > 40) {
+			this.log('unrealistic high gas usage > G25');
+			validReading = false;
+		}
+		// check if timestamps make sense
+		const { tm, gtm } = readings; // power meter timestamp, gas meter timestamp
+		if (tm - this.lastMeters.meterPowerIntervalTm < 0) {
+			this.log('power time is negative');
+			validReading = false;
+		}
+		if (gtm - this.lastMeters.meterGasTm < 0) {
+			this.log('gas time is negative');
+			validReading = false;
+		}
+		if ((gtm !== 0) && (Math.abs(gtm - tm) > 45000)) {	// > 12 hrs difference
+			this.log('gas and power time differ too much');
+			validReading = false;
+		}
+		// check if power readings make sense
+		if (Math.abs(readings.pwr) > 56000) {
+			this.log('unrealistic high power >3x80A');
+			validReading = false;
+		}
+		const {
+			net, p1, p2, n1, n2,
+		} = readings;
+		if (Math.abs(net - ((p1 + p2) - (n1 + n2))) > 0.1) {
+			this.log('power meters do not add up');
+			validReading = false;
+		}
+		const timeDelta = tm - this.lastMeters.meterPowerIntervalTm; // in seconds
+		if (Math.abs(net - this.lastMeters.meterPower) / (timeDelta / 60 / 60) > 56) {
+			this.log('unrealistic high power meter delta >3x80A / 56KWh');
+			validReading = false;
+		}
+		if (!validReading) {
+			// this.log(this.lastMeters);
+			this.log(readings);
+		}
+		return validReading;
+	}
+
 	handleNewReadings(readings) {
 		try {
 			// console.log(`handling new readings for ${this.getName()}`);
@@ -226,23 +283,9 @@ class BeeclearDevice extends Device {
 				measurePower = measurePowerAvg;
 			}
 
-			// trigger the custom trigger flowcards
-			if ((this.lastMeters.offPeak !== null) && (offPeak !== this.lastMeters.offPeak)) {
-				const tokens = { tariff: offPeak };
-				this.homey.flow.getDeviceTriggerCard('tariff_changed')
-					.trigger(this, tokens)
-					.catch(this.error);
-			}
-			if ((this.lastMeters.meterPowerTm !== null) && (measurePower !== this.lastMeters.measurePower)) {
-				const measurePowerDelta = (measurePower - this.lastMeters.measurePower);
-				const tokens = {
-					power: measurePower,
-					power_delta: measurePowerDelta,
-				};
-				this.homey.flow.getDeviceTriggerCard('power_changed')
-					.trigger(this, tokens)
-					.catch(this.error);
-			}
+			// setup custom trigger flowcards
+			const tariffChanged = (this.lastMeters.offPeak !== null) && (offPeak !== this.getCapabilityValue('meter_offPeak'));
+			const powerChanged = (this.lastMeters.meterPowerTm !== null) && (measurePower !== this.lastMeters.measurePower);
 
 			// update the ledring screensavers
 			if (measurePower !== this.lastMeters.measurePower) this.driver.ledring.change(this.getSettings(), measurePower);
@@ -266,6 +309,21 @@ class BeeclearDevice extends Device {
 			};
 			// update the device state
 			this.updateDeviceState(meters);
+
+			// execute flow triggers
+			if (tariffChanged) {
+				const tokens = { tariff: offPeak };
+				this.homey.app.triggerTariffChanged(this, tokens, {});
+			}
+			if (powerChanged) {
+				const measurePowerDelta = (measurePower - this.lastMeters.measurePower);
+				const tokens = {
+					power: measurePower,
+					power_delta: measurePowerDelta,
+				};
+				this.homey.app.triggerPowerChanged(this, tokens, {});
+			}
+
 			// console.log(meters);
 			this.lastMeters = meters;
 			this.watchDogCounter = 10;
