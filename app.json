@@ -27,7 +27,7 @@
       "gas"
     ]
   },
-  "version": "2.1.0",
+  "version": "2.2.1",
   "sdk": 3,
   "brandColor": "#F9A31B",
   "compatibility": ">= 5.0.0",

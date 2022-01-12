@@ -10,5 +10,8 @@
   },
   "2.1.0": {
     "en": "Fix tariff change flow trigger. Added filter unrealistic values option."
+  },
+  "2.2.1": {
+    "en": "Fix flow start before capabilities update. Log tarrif change."
   }
 }

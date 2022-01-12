@@ -4,3 +4,7 @@ roadmap.txt
 testing.js
 build
 
+
+
+# Added by Homey CLI
+/.homeybuild/

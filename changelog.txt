@@ -1,3 +1,4 @@
+v2.2.1  2022.01.12 Fix flow start before capabilities update. Log tarrif change.
 v2.1.0  2021.12.16 Fix tariff change flow trigger. Added filter unrealistic values option.
 v2.0.0  2021.11.26 Rewrite to SDK3 and Homey Compose. Fixed offPeak state after app restart. Fixed several 0-value bugs. Http timeout depending on poll time. package beeclear@1.1.0. Ledring code updated.
 v1.0.1  2020.10.03 Move to package beeclear@1.0.0. App icon update. Added NL app store translation. Minor fixes.

@@ -1,5 +1,5 @@
 /*
-Copyright 2020 - 2021, Robin de Gruijter (gruijter@hotmail.com)
+Copyright 2020 - 2022, Robin de Gruijter (gruijter@hotmail.com)
 
 This file is part of com.gruijter.beeclear.
 
@@ -130,7 +130,7 @@ class BeeclearDevice extends Device {
 				return;
 			}
 			this.setAvailable();
-			this.handleNewReadings(readings);
+			await this.handleNewReadings(readings);
 			this.watchDogCounter = 10;
 		} catch (error) {
 			this.setUnavailable(error.message);
@@ -167,7 +167,7 @@ class BeeclearDevice extends Device {
 		}
 	}
 
-	updateDeviceState(meters) {
+	async updateDeviceState(meters) {
 		// this.log(`updating states for: ${this.getName()}`);
 		try {
 			this.setCapability('measure_power', meters.measurePower);
@@ -237,7 +237,7 @@ class BeeclearDevice extends Device {
 		return validReading;
 	}
 
-	handleNewReadings(readings) {
+	async handleNewReadings(readings) {
 		try {
 			// console.log(`handling new readings for ${this.getName()}`);
 			// gas readings from device
@@ -308,10 +308,11 @@ class BeeclearDevice extends Device {
 				offPeak,
 			};
 			// update the device state
-			this.updateDeviceState(meters);
+			await this.updateDeviceState(meters);
 
 			// execute flow triggers
 			if (tariffChanged) {
+				this.log('Tariff changed. offPeak:', offPeak);
 				const tokens = { tariff: offPeak };
 				this.homey.app.triggerTariffChanged(this, tokens, {});
 			}
