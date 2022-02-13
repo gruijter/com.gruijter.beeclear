@@ -13,5 +13,8 @@
   },
   "2.2.1": {
     "en": "Fix flow start before capabilities update. Log tarrif change."
+  },
+  "2.2.2": {
+    "en": "Changed internal FLOW code. Fix flow AND card for tariff sometimes incorrect."
   }
 }

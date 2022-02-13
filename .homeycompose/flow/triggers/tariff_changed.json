@@ -1,29 +1,24 @@
 {
-    "id": "tariff_changed",
-    "title": {
-        "en": "Tariff has changed",
-        "nl": "Tarief is gewijzigd"
-    },
-    "titleFormatted": {
+  "title": {
       "en": "Tariff has changed",
       "nl": "Tarief is gewijzigd"
-    },
-    "tokens": [
+  },
+  "tokens": [
+    {
+      "name": "tariff",
+      "type": "boolean",
+      "title": {
+        "en": "off peak",
+        "nl": "dal"
+      },
+      "example": true
+    }
+  ],
+  "args": [
       {
-        "name": "tariff",
-        "type": "boolean",
-        "title": {
-          "en": "off-peak",
-          "nl": "dal"
-        },
-        "example": false
+          "type": "device",
+          "name": "device",
+          "filter": "driver_id=p1"
       }
-    ],
-    "args": [
-        {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=p1"
-        }
-    ]
+  ]
 }

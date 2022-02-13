@@ -158,9 +158,9 @@ class BeeclearDevice extends Device {
 		};
 	}
 
-	setCapability(capability, value) {
+	async setCapability(capability, value) {
 		if (this.hasCapability(capability)) {
-			this.setCapabilityValue(capability, value)
+			await this.setCapabilityValue(capability, value)
 				.catch((error) => {
 					this.log(error, capability, value);
 				});
@@ -170,15 +170,15 @@ class BeeclearDevice extends Device {
 	async updateDeviceState(meters) {
 		// this.log(`updating states for: ${this.getName()}`);
 		try {
-			this.setCapability('measure_power', meters.measurePower);
-			this.setCapability('meter_power', meters.meterPower);
-			this.setCapability('measure_gas', meters.measureGas);
-			this.setCapability('meter_gas', meters.meterGas);
-			this.setCapability('meter_power.peak', meters.meterPowerPeak);
-			this.setCapability('meter_offPeak', meters.offPeak);
-			this.setCapability('meter_power.offPeak', meters.meterPowerOffPeak);
-			this.setCapability('meter_power.producedPeak', meters.meterPowerPeakProduced);
-			this.setCapability('meter_power.producedOffPeak', meters.meterPowerOffPeakProduced);
+			await this.setCapability('meter_offPeak', meters.offPeak);
+			await this.setCapability('measure_power', meters.measurePower);
+			await this.setCapability('meter_power', meters.meterPower);
+			await this.setCapability('measure_gas', meters.measureGas);
+			await this.setCapability('meter_gas', meters.meterGas);
+			await this.setCapability('meter_power.peak', meters.meterPowerPeak);
+			await this.setCapability('meter_power.offPeak', meters.meterPowerOffPeak);
+			await this.setCapability('meter_power.producedPeak', meters.meterPowerPeakProduced);
+			await this.setCapability('meter_power.producedOffPeak', meters.meterPowerOffPeakProduced);
 		} catch (error) {
 			this.error(error);
 		}

@@ -27,7 +27,7 @@
       "gas"
     ]
   },
-  "version": "2.2.1",
+  "version": "2.2.2",
   "sdk": 3,
   "brandColor": "#F9A31B",
   "compatibility": ">= 5.0.0",
@@ -80,7 +80,6 @@
   "flow": {
     "triggers": [
       {
-        "id": "power_changed",
         "title": {
           "en": "Power delta",
           "nl": "Stroomverbruik delta"
@@ -111,15 +110,11 @@
             },
             "example": 18
           }
-        ]
+        ],
+        "id": "power_changed"
       },
       {
-        "id": "tariff_changed",
         "title": {
-          "en": "Tariff has changed",
-          "nl": "Tarief is gewijzigd"
-        },
-        "titleFormatted": {
           "en": "Tariff has changed",
           "nl": "Tarief is gewijzigd"
         },
@@ -128,10 +123,10 @@
             "name": "tariff",
             "type": "boolean",
             "title": {
-              "en": "off-peak",
+              "en": "off peak",
               "nl": "dal"
             },
-            "example": false
+            "example": true
           }
         ],
         "args": [
@@ -140,12 +135,12 @@
             "name": "device",
             "filter": "driver_id=p1"
           }
-        ]
+        ],
+        "id": "tariff_changed"
       }
     ],
     "conditions": [
       {
-        "id": "is_offPeak",
         "title": {
           "en": "Tariff !{{is|isn't}} off peak",
           "nl": "Tarief !{{is|is niet}} dal"
@@ -160,7 +155,8 @@
             "name": "device",
             "filter": "driver_id=p1"
           }
-        ]
+        ],
+        "id": "is_offPeak"
       }
     ]
   },
