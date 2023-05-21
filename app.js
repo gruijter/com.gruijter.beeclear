@@ -1,5 +1,5 @@
 /*
-Copyright 2020 - 2022, Robin de Gruijter (gruijter@hotmail.com)
+Copyright 2020 - 2023, Robin de Gruijter (gruijter@hotmail.com)
 
 This file is part of com.gruijter.beeclear.
 
@@ -20,13 +20,10 @@ along with com.gruijter.beeclear.  If not, see <http://www.gnu.org/licenses/>.
 'use strict';
 
 const Homey = require('homey');
-const Logger = require('./captureLogs.js');
 
 class MyApp extends Homey.App {
 
 	onInit() {
-		if (!this.logger) this.logger = new Logger({ homey: this.homey, length: 200 });
-
 		// register some listeners
 		process.on('unhandledRejection', (error) => {
 			this.error('unhandledRejection! ', error);
@@ -48,10 +45,6 @@ class MyApp extends Homey.App {
 
 		this.log('Beeclear app is running!');
 
-		// do garbage collection every 10 minutes
-		// this.intervalIdGc = setInterval(() => {
-		// 	global.gc();
-		// }, 1000 * 60 * 10);
 	}
 
 	// ============================================================

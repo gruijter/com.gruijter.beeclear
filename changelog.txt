@@ -1,3 +1,4 @@
+v3.0.0  2023.05.21 HP2023 compatibility fixed. Belgian smart meter support added. 3 phase info added. Several fixes and optimizations. Removed app settings. beeclear@2.0.1.
 v2.2.2  2022.02.13 Changed internal FLOW code. Fix flow AND card for tariff sometimes incorrect.
 v2.2.1  2022.01.12 Fix flow start before capabilities update. Log tarrif change.
 v2.1.0  2021.12.16 Fix tariff change flow trigger. Added filter unrealistic values option.

@@ -16,5 +16,8 @@
   },
   "2.2.2": {
     "en": "Changed internal FLOW code. Fix flow AND card for tariff sometimes incorrect."
+  },
+  "3.0.0": {
+    "en": "HP2023 compatibility fixed. Belgian smart meter support added. 3 phase info added. Several fixes and optimizations. Removed app settings. beeclear@2.0.1."
   }
 }

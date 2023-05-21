@@ -2,7 +2,7 @@
 	License, v. 2.0. If a copy of the MPL was not distributed with this
 	file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-	Copyright 2020, Robin de Gruijter <gruijter@hotmail.com> */
+	Copyright 2020 - 2023, Robin de Gruijter <gruijter@hotmail.com> */
 
 // INSTRUCTIONS FOR TESTING FROM DESKTOP:
 // install node (https://nodejs.org)
@@ -12,13 +12,14 @@
 'use strict';
 
 const os = require('os');
-const BeeClear = require('../beeclear.js');
+const BeeClear = require('../beeclear');
 const { version } = require('../package.json');
 // const util = require('util');
 
 let log = [];
 let errorCount = 0;
 let t0 = Date.now();
+let short = false;
 const bc = new BeeClear();
 
 // function to setup the router session
@@ -29,6 +30,7 @@ async function setupSession(opts) {
 		log.push(`BeeClear package version: ${version}`);
 		log.push(`OS: ${os.platform()} ${os.release()}`);
 		Object.keys(opts).forEach((opt) => {
+			if (opt === 'short') short = opts[opt];
 			bc[opt] = opts[opt];
 		});
 		t0 = Date.now();
@@ -99,7 +101,7 @@ async function doTest(opts) {
 
 		// get meter readings
 		log.push('trying to get meter readings:');
-		const readings = await bc.getMeterReadings()
+		const readings = await bc.getMeterReadings(short)
 			.catch((error) => {
 				log.push('error:', error.message);
 				errorCount += 1;

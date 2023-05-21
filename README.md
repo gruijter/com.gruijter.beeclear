@@ -1,6 +1,6 @@
 # BeeClear Energy manager #
 
-Homey app to interface DSMR P1 smart meters via a BeeClear Enery Manager.
+Homey app to interface DSMR P1 smart meters via the BeeClear Enery Manager.
 
 A local connection over IP is used, so there is no need for an internet connection.
 
@@ -12,25 +12,18 @@ The app logs and provides flow cards for the following data:
 - Gas meter (m3)
 - Tariff change (off-peak, true or false)
 
-Ledring screensaver:
-- See how much energy you are using or producing just by looking at your Homey!
-- Is the wash-dryer ready? Am I now producing power to the grid?
-
 The power is totalized for consumed and produced power, during off-peak and
 peak hours. Production to the powergrid is displayed as negative watts.
-Only changed values are logged.
 
 To setup go to "Devices" and add the device. Provide the username and password.
 The polling interval can be changed in the device settings.
 
-##### Donate: #####
-If you like the app you can show your appreciation by posting it in the [forum],
-and if you really like it you can [buy me a beer]
+##### Support #####
+Check the [forum]
 
 ============================================================================
 
 Version changelog: [changelog.txt]
 
-[buy me a beer]: https://www.paypal.com/paypalme/gruijter
-[forum]: https://community.athom.com/t/34980
+[forum]: https://community.athom.com/t/80608
 [changelog.txt]: https://github.com/gruijter/com.gruijter.beeclear/blob/master/changelog.txt

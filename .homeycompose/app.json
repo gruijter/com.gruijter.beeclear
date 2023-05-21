@@ -5,8 +5,8 @@
     "nl": "BeeClear"
   },
   "description": {
-    "en": "P1 smart meter readout via the Beeclear Energy Manager",
-    "nl": "P1 slimme meter uitlezen via de Beeclear Energie Manager"
+    "en": "Realtime insight in elektricity usage",
+    "nl": "Realtime inzicht in elektriciteitverbruik"
   },
   "tags": {
     "en": [
@@ -26,27 +26,21 @@
       "gas"
     ]
   },
-  "version": "2.2.2",
+  "version": "3.0.0",
   "sdk": 3,
-  "brandColor": "#F9A31B",
-  "compatibility": ">= 5.0.0",
+  "brandColor": "#e8861e",
+  "compatibility": ">= 8.0.0",
   "author": {
-    "name": "Robin Gruijter",
-    "email": "gruijter@hotmail.com"
+    "name": "BeeClear",
+    "email": "homey@beeclear.nl"
   },
   "copyright": "Robin de Gruijter (gruijter@hotmail.com)",
   "license": " GPL-3.0-or-later",
-  "contributing": {
-    "donate": {
-      "paypal": {
-        "username": "gruijter"
-      }
-    }
-  },
   "bugs": {
-    "url": "https://github.com/gruijter/com.gruijter.beeclear/issues"
+    "url": "https://community.homey.app/t/80608"
   },
-  "homeyCommunityTopicId": 34980,
+  "support": "mailto:homey@beeclear.nl",
+  "homeyCommunityTopicId": 80608,
   "images": {
     "large": "./assets/images/large.jpg",
     "small": "./assets/images/small.jpg"

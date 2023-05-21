@@ -1,5 +1,6 @@
+/* eslint-disable no-await-in-loop */
 /*
-Copyright 2020 - 2022, Robin de Gruijter (gruijter@hotmail.com)
+Copyright 2020 - 2023, Robin de Gruijter (gruijter@hotmail.com)
 
 This file is part of com.gruijter.beeclear.
 
@@ -26,7 +27,6 @@ const util = require('util');
 const setTimeoutPromise = util.promisify(setTimeout);
 
 class BeeclearDevice extends Device {
-
 	// this method is called when the Device is inited
 	async onInit() {
 		this.log('device init: ', this.getName(), 'id:', this.getData().id);
@@ -46,14 +46,20 @@ class BeeclearDevice extends Device {
 				password: settings.password,
 				useTLS: settings.useTLS,
 				timeout: (settings.pollingInterval * 900),
+				reversed: settings.reversed,
 			};
 			this.bc = new Beeclear(options);
+
+			// check for version migration or capability change
+			if (!this.migrated) await this.migrate();
+			await this.setAvailable();
 
 			// start polling device for info
 			this.startPolling(settings.pollingInterval);
 
 		} catch (error) {
 			this.error(error);
+			this.restartDevice(10 * 60 * 1000);
 		}
 	}
 
@@ -97,11 +103,108 @@ class BeeclearDevice extends Device {
 		this.log(`Meter renamed to: ${name}`);
 	}
 
+	async migrate() {
+		try {
+			this.log(`checking migration for ${this.getName()}`);
+			if (!this.bc.loggedIn) await this.bc.login();
+			const settings = this.getSettings();
+
+			if (!settings.level || (settings.level < '3')) {
+				const { setting } = await this.bc.getDeviceInfo();
+				settings.include_gas = setting.showgas;
+				settings.include_off_peak = setting.dubbeltariefmeter;
+				settings.include3phase = setting.driefaseMeting;
+				settings.include_production = setting.levering;
+				await this.setSettings(settings);
+			}
+
+			// compile selected and available capabilities
+			const p1Readings = await this.bc.getMeterReadings(true);
+			const capabilities = [];
+			if (settings.include_gas) {
+				capabilities.push('measure_gas');
+			}
+			if (settings.include_off_peak) {
+				capabilities.push('meter_offPeak');
+			}
+			capabilities.push('measure_power');	// always include measure_power
+			if (p1Readings && Number.isFinite(p1Readings.l1)) { //  has current and power per phase
+				capabilities.push('measure_power.l1');
+				if (settings.include3phase) {
+					capabilities.push('measure_power.l2');
+					capabilities.push('measure_power.l3');
+				}
+			}
+			if (p1Readings && Number.isFinite(p1Readings.v1)) { // has voltage and current per phase
+				capabilities.push('measure_current.l1');
+				if (settings.include3phase) {
+					capabilities.push('measure_current.l2');
+					capabilities.push('measure_current.l3');
+				}
+				capabilities.push('measure_voltage.l1');
+				if (settings.include3phase) {
+					capabilities.push('measure_voltage.l2');
+					capabilities.push('measure_voltage.l3');
+				}
+			}
+			if (settings.include_off_peak) {
+				capabilities.push('meter_power.peak');
+				capabilities.push('meter_power.offPeak');
+			}
+			if (settings.include_production) {
+				capabilities.push('meter_power.producedPeak');
+			}
+			if (settings.include_production && settings.include_off_peak) {
+				capabilities.push('meter_power.producedOffPeak');
+			}
+			capabilities.push('meter_power');	// always include meter_power
+			if (settings.include_gas) {
+				capabilities.push('meter_gas');
+			}
+
+			// store the capability states before migration
+			const sym = Object.getOwnPropertySymbols(this).find((s) => String(s) === 'Symbol(state)');
+			const state = this[sym];
+			// check and repair incorrect capability(order)
+			const correctCaps = capabilities;
+			for (let index = 0; index < correctCaps.length; index += 1) {
+				const caps = this.getCapabilities();
+				const newCap = correctCaps[index];
+				if (caps[index] !== newCap) {
+					this.setUnavailable('Device is migrating. Please wait!');
+					// remove all caps from here
+					for (let i = index; i < caps.length; i += 1) {
+						this.log(`removing capability ${caps[i]} for ${this.getName()}`);
+						await this.removeCapability(caps[i]).catch(this.error);
+						await setTimeoutPromise(2 * 1000); // wait a bit for Homey to settle
+					}
+					// add the new cap
+					this.log(`adding capability ${newCap} for ${this.getName()}`);
+					await this.addCapability(newCap).catch(this.error);
+					// restore capability state
+					if (state[newCap] !== undefined) this.log(`${this.getName()} restoring value ${newCap} to ${state[newCap]}`);
+					else this.log(`${this.getName()} no value to restore for new capability ${newCap}, ${state[newCap]}!`);
+					await this.setCapability(newCap, state[newCap]);
+					await setTimeoutPromise(2 * 1000); // wait a bit for Homey to settle
+				}
+			}
+
+			// set new migrate level
+			this.setSettings({ level: this.homey.app.manifest.version });
+			this.migrated = true;
+			return Promise.resolve(this.migrated);
+		} catch (error) {
+			this.error('Migration failed', error);
+			return Promise.reject(error);
+		}
+	}
+
 	// this method is called when the user has changed the device's settings in Homey.
 	async onSettings({ newSettings }) { // , oldSettings, changedKeys) {
 		this.log(`${this.getName()} device settings changed`);
 		this.log(newSettings);
-		this.restartDevice(1000);
+		this.migrated = false;
+		this.restartDevice(2000);
 		return Promise.resolve(true);
 	}
 
@@ -159,7 +262,7 @@ class BeeclearDevice extends Device {
 	}
 
 	async setCapability(capability, value) {
-		if (this.hasCapability(capability)) {
+		if (this.hasCapability(capability) && value !== undefined) {
 			await this.setCapabilityValue(capability, value)
 				.catch((error) => {
 					this.log(error, capability, value);
@@ -169,6 +272,7 @@ class BeeclearDevice extends Device {
 
 	async updateDeviceState(meters) {
 		// this.log(`updating states for: ${this.getName()}`);
+		console.log(meters);
 		try {
 			await this.setCapability('meter_offPeak', meters.offPeak);
 			await this.setCapability('measure_power', meters.measurePower);
@@ -179,6 +283,15 @@ class BeeclearDevice extends Device {
 			await this.setCapability('meter_power.offPeak', meters.meterPowerOffPeak);
 			await this.setCapability('meter_power.producedPeak', meters.meterPowerPeakProduced);
 			await this.setCapability('meter_power.producedOffPeak', meters.meterPowerOffPeakProduced);
+			await this.setCapability('measure_power.l1', meters.l1);
+			await this.setCapability('measure_power.l2', meters.l2);
+			await this.setCapability('measure_power.l3', meters.l3);
+			await this.setCapability('measure_current.l1', meters.i1);
+			await this.setCapability('measure_current.l2', meters.i2);
+			await this.setCapability('measure_current.l3', meters.i3);
+			await this.setCapability('measure_voltage.l1', meters.v1);
+			await this.setCapability('measure_voltage.l2', meters.v2);
+			await this.setCapability('measure_voltage.l3', meters.v3);
 		} catch (error) {
 			this.error(error);
 		}
@@ -284,7 +397,8 @@ class BeeclearDevice extends Device {
 			}
 
 			// setup custom trigger flowcards
-			const tariffChanged = (this.lastMeters.offPeak !== null) && (offPeak !== this.getCapabilityValue('meter_offPeak'));
+			const tariffChanged = (this.lastMeters.offPeak !== null) && (this.lastMeters.offPeak !== undefined)
+				&& (offPeak !== this.getCapabilityValue('meter_offPeak'));
 			const powerChanged = (this.lastMeters.meterPowerTm !== null) && (measurePower !== this.lastMeters.measurePower);
 
 			// update the ledring screensavers
@@ -306,6 +420,15 @@ class BeeclearDevice extends Device {
 				meterPowerInterval,
 				meterPowerIntervalTm,
 				offPeak,
+				l1: readings.l1,
+				l2: readings.l2,
+				l3: readings.l3,
+				v1: readings.v1,
+				v2: readings.v2,
+				v3: readings.v3,
+				i1: readings.i1,
+				i2: readings.i2,
+				i3: readings.i3,
 			};
 			// update the device state
 			await this.updateDeviceState(meters);
@@ -332,7 +455,6 @@ class BeeclearDevice extends Device {
 			this.error(error);
 		}
 	}
-
 }
 
 module.exports = BeeclearDevice;

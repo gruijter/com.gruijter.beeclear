@@ -1,47 +1,28 @@
-<!doctype html>
-<html>
-<head>
-	<link rel="stylesheet" type="text/css" href="styles.css" />
-	<script type="text/javascript" src="/manager/webserver/assets/js/jquery.js"></script>
-	<script type="text/javascript" src="pair.js" data-origin="pair"></script>
-	<style>
-		/* place on top of Homey navigation window */
-		#hy-views { position: static; }
-	</style>
-</head>
-<body>
-	<div class="setting">
-		<p data-i18n="pair.instructions" class="instructions">Instructions</p>
+<script type="text/javascript" src="pair.js" data-origin="pair"></script>
 
-		<label class="settings-item-description" data-i18n="pair.username">username</label>
-		<div class="settings-itemgroup">
-			<input id="username" type="text" value="" placeholder="default">
-		</div>
+<form class="homey-form">
+	<div class="homey-form-group">
 
-		<label class="settings-item-description" data-i18n="pair.password">password</label>
-		<div class="settings-itemgroup">
-			<input id="password" type="password" value="" placeholder="default">
-		</div>
+		<h1 class="homey-title" data-i18n="pair.title"></h1>
+		<p class="instructions" data-i18n="pair.instructions">Instructions</p>
 
-		<label class="settings-item-description" data-i18n="pair.host">host</label>
-		<div class="settings-itemgroup">
-			<input id="host" type="text" value="" placeholder="Auto-discover">
-		</div>
+		<label class="homey-form-label" for="host" data-i18n="pair.host"></label>
+		<input class="homey-form-input" id="host" type="text" placeholder="Auto-discover" value="" />
 
-		<div class="settings-itemgroup">
-			<div class="settings-item-text">
-					<span data-i18n="pair.useTLS">HTTPS</span>
-			</div>
-			<div class="settings-item-last">
-					<label class="form-switch">
-							<input type="checkbox" id="useTLS" >
-							<i></i>
-					</label>
-			</div>
-		</div>
+		<label class="homey-form-checkbox">
+			<input class="homey-form-checkbox-input" type="checkbox" id="useTLS" name="useTLS" />
+			<span class="homey-form-checkbox-checkmark"></span>
+			<span class="homey-form-checkbox-text" data-i18n="pair.useTLS"></span>
+		</label>
 
-		<label class="settings-item-description" data-i18n="pair.testSettings">Start test</label>
-		<button id="runTest" class="btn" onclick="testSettings()" data-i18n="pair.testSettings">Start Test</button>
+
+		<label class="homey-form-label" for="username" data-i18n="pair.username"></label>
+		<input class="homey-form-input" id="username" type="text" placeholder="default" value="" />
+
+		<label class="homey-form-label" for="password" data-i18n="pair.password"></label>
+		<input class="homey-form-input" id="password" type="password" placeholder="default" value="" />
+
 	</div>
-</body>
-</html>
+</form>
+<br>
+<button class="homey-button-primary-full" id="runTest" onclick="testSettings()" data-i18n="pair.testSettings" ></button>

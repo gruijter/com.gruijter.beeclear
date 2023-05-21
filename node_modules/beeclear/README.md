@@ -18,7 +18,7 @@
 * reboot the device
 
 ### Note:
-This package has been developed and tested with firmware 49.10_NL.
+This package has been developed and tested with firmware 49.42_NL.
 
 ### Install:
 If you don't have Node installed yet, get it from: [Nodejs.org](https://nodejs.org "Nodejs website").

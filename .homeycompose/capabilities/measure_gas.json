@@ -5,13 +5,13 @@
     "nl": "Gas"
   },
   "desc": {
-    "en": "Gas usage (previous hour)",
-    "nl": "Gasverbruik (vorige uur)"
+    "en": "Gas usage",
+    "nl": "Gasverbruik"
   },
   "decimals": 4,
   "units": {
-    "en": "m³",
-    "nl": "m³"
+    "en": "m³ /hr",
+    "nl": "m³ /uur"
   },
   "getable": true,
   "setable": false,

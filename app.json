@@ -6,8 +6,8 @@
     "nl": "BeeClear"
   },
   "description": {
-    "en": "P1 smart meter readout via the Beeclear Energy Manager",
-    "nl": "P1 slimme meter uitlezen via de Beeclear Energie Manager"
+    "en": "Realtime insight in elektricity usage",
+    "nl": "Realtime inzicht in elektriciteitverbruik"
   },
   "tags": {
     "en": [
@@ -27,27 +27,21 @@
       "gas"
     ]
   },
-  "version": "2.2.2",
+  "version": "3.0.0",
   "sdk": 3,
-  "brandColor": "#F9A31B",
-  "compatibility": ">= 5.0.0",
+  "brandColor": "#e8861e",
+  "compatibility": ">= 8.0.0",
   "author": {
-    "name": "Robin Gruijter",
-    "email": "gruijter@hotmail.com"
+    "name": "BeeClear",
+    "email": "homey@beeclear.nl"
   },
   "copyright": "Robin de Gruijter (gruijter@hotmail.com)",
   "license": " GPL-3.0-or-later",
-  "contributing": {
-    "donate": {
-      "paypal": {
-        "username": "gruijter"
-      }
-    }
-  },
   "bugs": {
-    "url": "https://github.com/gruijter/com.gruijter.beeclear/issues"
+    "url": "https://community.homey.app/t/80608"
   },
-  "homeyCommunityTopicId": 34980,
+  "support": "mailto:homey@beeclear.nl",
+  "homeyCommunityTopicId": 80608,
   "images": {
     "large": "./assets/images/large.jpg",
     "small": "./assets/images/small.jpg"
@@ -173,15 +167,24 @@
       "class": "sensor",
       "discovery": "beeclear",
       "capabilities": [
-        "measure_power",
-        "meter_offPeak",
         "measure_gas",
-        "meter_gas",
-        "meter_power",
+        "meter_offPeak",
+        "measure_power",
+        "measure_power.l1",
+        "measure_power.l2",
+        "measure_power.l3",
+        "measure_current.l1",
+        "measure_current.l2",
+        "measure_current.l3",
+        "measure_voltage.l1",
+        "measure_voltage.l2",
+        "measure_voltage.l3",
         "meter_power.peak",
         "meter_power.offPeak",
         "meter_power.producedPeak",
-        "meter_power.producedOffPeak"
+        "meter_power.producedOffPeak",
+        "meter_power",
+        "meter_gas"
       ],
       "energy": {
         "cumulative": true,
@@ -190,23 +193,37 @@
         }
       },
       "capabilitiesOptions": {
+        "measure_power": {
+          "title": {
+            "en": "Power total",
+            "nl": "Vermogen totaal"
+          },
+          "decimals": 2
+        },
         "meter_power": {
           "title": {
-            "en": "Power meter total",
+            "en": "Energy meter total",
             "nl": "Energie totaal"
           },
           "decimals": 4
         },
         "meter_power.peak": {
           "title": {
-            "en": "Power meter peak",
+            "en": "Energy meter peak",
             "nl": "Energie piek"
           },
           "decimals": 4
         },
         "meter_power.offPeak": {
+          "meter_power": {
+            "title": {
+              "en": "Energy meter total",
+              "nl": "Energie totaal"
+            },
+            "decimals": 4
+          },
           "title": {
-            "en": "Power meter off-peak",
+            "en": "Energy meter off-peak",
             "nl": "Energie dal"
           },
           "decimals": 4
@@ -224,6 +241,69 @@
             "nl": "Productie dal"
           },
           "decimals": 4
+        },
+        "measure_power.l1": {
+          "title": {
+            "en": "Power L1",
+            "nl": "Vermogen L1"
+          },
+          "decimals": 2
+        },
+        "measure_power.l2": {
+          "title": {
+            "en": "Power L2",
+            "nl": "Vermogen L2"
+          },
+          "decimals": 2
+        },
+        "measure_power.l3": {
+          "title": {
+            "en": "Power L3",
+            "nl": "Vermogen L3"
+          },
+          "decimals": 2
+        },
+        "measure_current.l1": {
+          "title": {
+            "en": "Current L1",
+            "nl": "Stroom L1"
+          },
+          "decimals": 2
+        },
+        "measure_current.l2": {
+          "title": {
+            "en": "Current L2",
+            "nl": "Stroom L2"
+          },
+          "decimals": 2
+        },
+        "measure_current.l3": {
+          "title": {
+            "en": "Current L3",
+            "nl": "Stroom L3"
+          },
+          "decimals": 2
+        },
+        "measure_voltage.l1": {
+          "title": {
+            "en": "Voltage L1",
+            "nl": "Spanning L1"
+          },
+          "decimals": 2
+        },
+        "measure_voltage.l2": {
+          "title": {
+            "en": "Voltage L2",
+            "nl": "Spanning L2"
+          },
+          "decimals": 2
+        },
+        "measure_voltage.l3": {
+          "title": {
+            "en": "Voltage L3",
+            "nl": "Spanning L3"
+          },
+          "decimals": 2
         }
       },
       "pair": [
@@ -315,27 +395,14 @@
                 "min": 10
               },
               "value": 10
-            },
-            {
-              "id": "filterReadings",
-              "type": "checkbox",
-              "label": {
-                "en": "Filter readings",
-                "nl": "Filter meetwaarden"
-              },
-              "hint": {
-                "en": "Ignore unrealistic meter readings",
-                "nl": "Negeer onrealistische meter waarden"
-              },
-              "value": false
             }
           ]
         },
         {
           "type": "group",
           "label": {
-            "en": "Ledring",
-            "nl": "Ledring"
+            "en": "Ledring (HP2016/2019)",
+            "nl": "Ledring (HP2016/2019)"
           },
           "children": [
             {
@@ -344,6 +411,10 @@
               "label": {
                 "en": "Max consumption (W)",
                 "nl": "Max gebruik (W)"
+              },
+              "hint": {
+                "en": "Ledring support is only available on Homey Pro 2016/2019",
+                "nl": "Ledring wordt alleen ondersteund op Homey Pro 2016/2019"
               },
               "attr": {
                 "min": 0
@@ -360,7 +431,82 @@
               "attr": {
                 "min": 0
               },
+              "hint": {
+                "en": "Ledring support is only available on Homey Pro 2016/2019",
+                "nl": "Ledring wordt alleen ondersteund op Homey Pro 2016/2019"
+              },
               "value": 3000
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Meter functionality",
+            "nl": "Meter functionaliteit"
+          },
+          "children": [
+            {
+              "id": "reversed",
+              "type": "checkbox",
+              "label": {
+                "en": "Reverse P1 meters",
+                "nl": "P1 meters omdraaien"
+              },
+              "hint": {
+                "en": "Set to reversed for Belgian P1 meters",
+                "nl": "Zet op omdraaien voor Belgische P1 meters"
+              },
+              "value": false
+            },
+            {
+              "id": "include_off_peak",
+              "type": "checkbox",
+              "label": {
+                "en": "Report OffPeak",
+                "nl": "Rapporteer Dal"
+              },
+              "value": true
+            },
+            {
+              "id": "include_production",
+              "type": "checkbox",
+              "label": {
+                "en": "Report production",
+                "nl": "Rapporteer productie"
+              },
+              "value": true
+            },
+            {
+              "id": "include3phase",
+              "type": "checkbox",
+              "label": {
+                "en": "Report 3 phases",
+                "nl": "Rapporteer 3 fasen"
+              },
+              "value": true
+            },
+            {
+              "id": "include_gas",
+              "type": "checkbox",
+              "label": {
+                "en": "Report gas",
+                "nl": "Rapporteer gas"
+              },
+              "value": true
+            },
+            {
+              "id": "filterReadings",
+              "type": "checkbox",
+              "label": {
+                "en": "Filter readings",
+                "nl": "Filter meetwaarden"
+              },
+              "hint": {
+                "en": "Ignore unrealistic meter readings",
+                "nl": "Negeer onrealistische meter waarden"
+              },
+              "value": false
             }
           ]
         }
@@ -382,13 +528,13 @@
         "nl": "Gas"
       },
       "desc": {
-        "en": "Gas usage (previous hour)",
-        "nl": "Gasverbruik (vorige uur)"
+        "en": "Gas usage",
+        "nl": "Gasverbruik"
       },
       "decimals": 4,
       "units": {
-        "en": "m³",
-        "nl": "m³"
+        "en": "m³ /hr",
+        "nl": "m³ /uur"
       },
       "getable": true,
       "setable": false,

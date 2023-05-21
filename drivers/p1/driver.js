@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable prefer-destructuring */
 /*
-Copyright 2020 - 2022, Robin de Gruijter (gruijter@hotmail.com)
+Copyright 2020 - 2023, Robin de Gruijter (gruijter@hotmail.com)
 
 This file is part of com.gruijter.beeclear.
 
@@ -23,7 +23,7 @@ along with com.gruijter.beeclear.  If not, see <http://www.gnu.org/licenses/>.
 
 const Homey = require('homey');
 const Beeclear = require('beeclear');
-const Ledring = require('../../ledring.js');
+const Ledring = require('../../ledring');
 
 class Driver extends Homey.Driver {
 
@@ -33,9 +33,10 @@ class Driver extends Homey.Driver {
 	}
 
 	async onPair(session) {
-		session.setHandler('validate', async (data) => {
+		session.setHandler('validate', async (dat) => {
 			try {
 				this.log('save button pressed in frontend');
+				const data = dat;
 				let host = data.host.split(':')[0];
 				host = (host === '') ? undefined : host;
 				let port = Number(data.host.split(':')[1]);
@@ -51,8 +52,56 @@ class Driver extends Homey.Driver {
 				};
 				const bc = new Beeclear(options);
 				await bc.login();
-				const { setting } = await bc.getDeviceInfo();
 				const { eth } = await bc.getNetwork();
+
+				// compile selected and available capabilities
+				const { setting } = await bc.getDeviceInfo();
+				data.includeGas = setting.showgas;
+				data.includeOffPeak = setting.dubbeltariefmeter;
+				data.include3phase = setting.driefaseMeting;
+				data.includeProduction = setting.levering;
+				const p1Readings = await bc.getMeterReadings(true);
+				const capabilities = [];
+				if (data.includeGas) {
+					capabilities.push('measure_gas');
+				}
+				if (data.includeOffPeak) {
+					capabilities.push('meter_offPeak');
+				}
+				capabilities.push('measure_power');	// always include measure_power
+				if (p1Readings && Number.isFinite(p1Readings.l1)) { //  has current and power per phase
+					capabilities.push('measure_power.l1');
+					if (data.include3phase) {
+						capabilities.push('measure_power.l2');
+						capabilities.push('measure_power.l3');
+					}
+				}
+				if (p1Readings && Number.isFinite(p1Readings.v1)) { // has voltage and current per phase
+					capabilities.push('measure_current.l1');
+					if (data.include3phase) {
+						capabilities.push('measure_current.l2');
+						capabilities.push('measure_current.l3');
+					}
+					capabilities.push('measure_voltage.l1');
+					if (data.include3phase) {
+						capabilities.push('measure_voltage.l2');
+						capabilities.push('measure_voltage.l3');
+					}
+				}
+				if (data.includeOffPeak) {
+					capabilities.push('meter_power.peak');
+					capabilities.push('meter_power.offPeak');
+				}
+				if (data.includeProduction) {
+					capabilities.push('meter_power.producedPeak');
+				}
+				if (data.includeProduction && data.includeOffPeak) {
+					capabilities.push('meter_power.producedOffPeak');
+				}
+				capabilities.push('meter_power');	// always include meter_power
+				if (data.includeGas) {
+					capabilities.push('meter_gas');
+				}
 
 				const device = {
 					name: 'Beeclear',
@@ -66,34 +115,13 @@ class Driver extends Homey.Driver {
 						useTLS: bc.useTLS,
 						ledring_usage_limit: 3000,
 						ledring_production_limit: 3000,
+						include_gas: setting.showgas,
+						include_off_peak: setting.dubbeltariefmeter,
+						include3phase: setting.driefaseMeting,
+						include_production: setting.levering,
 					},
-					capabilities: [
-						'measure_power',
-						'meter_power',
-						// 'measure_gas',
-						// 'meter_gas',
-						// 'meter_offPeak',
-						// 'meter_power.peak',
-						// 'meter_power.offPeak',
-						// 'meter_power.producedPeak',
-						// 'meter_power.producedOffPeak',
-					],
+					capabilities,
 				};
-				if (setting.dubbeltariefmeter) {
-					device.capabilities.push('meter_offPeak');
-					device.capabilities.push('meter_power.peak');
-					device.capabilities.push('meter_power.offPeak');
-				}
-				if (setting.levering) {
-					device.capabilities.push('meter_power.producedPeak');
-				}
-				if (setting.dubbeltariefmeter && setting.levering) {
-					device.capabilities.push('meter_power.producedOffPeak');
-				}
-				if (setting.showgas) {
-					device.capabilities.push('measure_gas');
-					device.capabilities.push('meter_gas');
-				}
 				return JSON.stringify(device); // report success to frontend
 			}	catch (error) {
 				this.error('Pair error', error);
