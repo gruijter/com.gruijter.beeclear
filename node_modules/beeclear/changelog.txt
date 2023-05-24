@@ -1,3 +1,4 @@
+2.0.2 - 2023.05.24 Fix using HTTPS with self signed certificate.
 2.0.1 - 2023.05.21 Added Belgian meter support (reversed meters).
 2.0.0 - 2023.05.16 Added 3-phase short power information. Fixed http(s) timeout error. Documentation fixes.
 1.0.0 - 2020.10.01 Initial NPM release.

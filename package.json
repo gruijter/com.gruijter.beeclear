@@ -1,6 +1,6 @@
 {
   "name": "com.gruijter.beeclear",
-  "version": "2.0.0",
+  "version": "3.0.1",
   "description": "Connect Beeclear P1 to Homey",
   "main": "app.js",
   "scripts": {
@@ -15,7 +15,7 @@
   "author": "gruijter@hotmail.com",
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "beeclear": "^2.0.1",
+    "beeclear": "^2.0.2",
     "fixture-stdout": "^0.2.1"
   },
   "repository": {

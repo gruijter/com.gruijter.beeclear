@@ -272,7 +272,6 @@ class BeeclearDevice extends Device {
 
 	async updateDeviceState(meters) {
 		// this.log(`updating states for: ${this.getName()}`);
-		console.log(meters);
 		try {
 			await this.setCapability('meter_offPeak', meters.offPeak);
 			await this.setCapability('measure_power', meters.measurePower);

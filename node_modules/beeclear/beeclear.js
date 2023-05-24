@@ -361,6 +361,7 @@ class Beeclear {
 			}
 			const opts = options;
 			opts.timeout = timeout || this.timeout;
+			opts.rejectUnauthorized = false;
 			const req = https.request(opts, (res) => {
 				let resBody = '';
 				res.on('data', (chunk) => {
