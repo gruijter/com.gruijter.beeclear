@@ -3,6 +3,9 @@
   "version": "3.0.1",
   "description": "Connect Beeclear P1 to Homey",
   "main": "app.js",
+  "engines": {
+    "node": ">=12.16.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,5 +24,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/gruijter/com.gruijter.beeclear.git"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-athom": "^3.1.3"
   }
 }

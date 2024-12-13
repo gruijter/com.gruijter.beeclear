@@ -22,5 +22,8 @@
   },
   "3.0.1": {
     "en": "Fixed using HTTPS with self signed certificate. beeclear@2.0.2."
+  },
+  "3.1.0": {
+    "en": "Added Homey total imported/exported energy capability. Updated device image. Minor fixes."
   }
 }
